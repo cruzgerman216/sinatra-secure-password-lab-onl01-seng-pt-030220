@@ -22,7 +22,7 @@ class ApplicationController < Sinatra::Base
     end
   user = User.create(:username => params[:username], :password => params[:password])
   puts "TESTING"
-  puts user.save
+  puts user
   if user.save
     puts "TESSSSSSTING"
     redirect to "/login"
