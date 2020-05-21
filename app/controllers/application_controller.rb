@@ -39,11 +39,16 @@ end
   end
 
   post "/login" do
+    if params[:username] == ""
+      redirect to "/failure"
+    end
     user = User.find_by(:username => params[:username])
-    if user
-      redirect "/account"
+   
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect to "/success"
     else
-      redirect "/falure"
+      redirect to "/failure"
     end
   end
 
